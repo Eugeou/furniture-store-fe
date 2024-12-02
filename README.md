@@ -1,6 +1,14 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## This is a new [**ReactJS**](https://react.dev) project, bootstrapped using [`Create React App`](https://create-react-app.dev/), Javascript, Boostrap, Antd
+
+<img src= "https://github.com/Semester02-UIT-2023-2024/ClothingStore_ReactNative/assets/121101254/36c83c02-d913-4406-b8d4-eee582f55176" width="160" height="160" >
+<img src= "https://github.com/user-attachments/assets/558236fe-90b0-4d86-be0a-12f128c754ab" width="190" height="190" >
+<img src= "https://github.com/user-attachments/assets/7605acee-991e-4034-ae3c-b085433a86ad" width="150" height="150" >
+
+# Preview
+
+![Screenshot 2024-12-02 221329](https://github.com/user-attachments/assets/f313b61b-c899-4e05-b391-32b7a57c8da2)
 
 ## Available Scripts
 
