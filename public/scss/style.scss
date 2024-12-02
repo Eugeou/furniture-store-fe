@@ -889,3 +889,17 @@ textarea {
 		background:rgba($primary, .2);
 	}
 }
+
+.progress-bar {
+	position: fixed;
+	//padding: 40px;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 10px;
+	width: 100%;
+	background: #2ae3cd;
+	color: #2ae3cd; ;
+	transform-origin: 50%;
+  }
+  

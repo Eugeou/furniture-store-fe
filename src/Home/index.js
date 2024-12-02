@@ -1,65 +1,167 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useInView,
+  useMotionValue,
+  useMotionTemplate,
+} from "framer-motion";
+import { p } from "framer-motion/client";
 
 const Home = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  // const ref = useRef();
+  // const isInView = useInView(ref, { once: true });
+
+  const hero_ref = useRef();
+  const isInHeroView = useInView(hero_ref, { once: true });
+
+  const product_ref = useRef();
+  const isInProductView = useInView(product_ref, { once: true });
+
+  const wc_ref = useRef();
+  const isInWCView = useInView(wc_ref, { once: true });
+
+  const wh_ref = useRef();
+  const isInWHView = useInView(wh_ref, { once: true });
+
+  const popular_ref = useRef();
+  const isInPopularView = useInView(popular_ref, { once: true });
+
+  const blog_ref = useRef();
+  const isInBlogView = useInView(blog_ref, { once: true });
+
+  const { transform } = useSpring({
+    transform: isInHeroView ? "translateY(0px)" : "translateY(200px)",
+    config: {
+      tension: 100,
+      friction: 20,
+    },
+  });
+
   return (
     <>
       <div>
         {/* Start Hero Section */}
-        <div className="hero">
-          <div className="container">
+        <motion.div
+          layout
+          className="hero"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+          <div
+            className="container"
+            ref={hero_ref}
+            style={{
+              transform: isInHeroView ? "translateY(0px)" : "translateY(200px)",
+              opacity: isInHeroView ? 1 : 0,
+              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+            }}
+          >
             <div className="row justify-content-between">
-              <div className="col-lg-5">
+              <div className="col-lg-6 py-5">
                 <div className="intro-excerpt">
                   <h1>
-                    Modern Furniture
+                    Modern Furni
                     <span class="d-block">Best choice for you!</span>
                   </h1>
-                  <p className="mb-4">
-                    Visit out website and explore our best products now!
-                  </p>
+                  <h2 className="mb-4 text-secondary">
+                    Visit out website and explore our best products and offers now!
+                  </h2>
                   <p>
-                    <a href className="btn btn-secondary me-2">
-                      Shop Now
-                    </a>
-                    <a href="#" className="btn btn-white-outline">
-                      Explore
-                    </a>
+                    <motion.button
+                      className="border-0 bg-transparent hover:border-0"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <a href className="btn btn-secondary me-2">
+                        Shop Now
+                      </a>
+                    </motion.button>
+
+                    <motion.button
+                      className="border-0 bg-transparent"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <a href="#2" className="btn btn-white-outline">
+                        Explore
+                      </a>
+                    </motion.button>
                   </p>
                 </div>
               </div>
-              <div className="col-lg-7">
+              <div className="col-lg-6 py-5"
+                ref={hero_ref}
+                style={{
+                  transform: isInHeroView ? "translateY(0px)" : "translateY(200px)",
+                  opacity: isInHeroView ? 1 : 0,
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.75s",
+                }}
+              >
                 <div className="hero-img-wrap">
                   <img src="images/couch.png" className="img-fluid" />
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
         {/* End Hero Section */}
+
         {/* Start Product Section */}
-        <div className="product-section">
-          <div className="container">
+        <div className="product-section" id="2">
+          <motion.div
+            ref={product_ref}
+            className="container"
+            style={{
+              transform: isInProductView ? "none" : "translateX(-500px)",
+              opacity: isInProductView ? 1 : 0,
+              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+            }}
+          >
             <div className="row">
               {/* Start Column 1 */}
-              <div className="col-md-12 col-lg-3 mb-5 mb-lg-0">
+              <div className="col-md-12 col-lg-3 mb-5 mb-lg-0 py-5">
                 <h2 className="mb-4 section-title">
                   Crafted with excellent material.
                 </h2>
-                <p className="mb-4">
-                  Donec vitae odio quis nisl dapibus malesuada. Nullam ac
-                  aliquet velit. Aliquam vulputate velit imperdiet dolor tempor
-                  tristique.{" "}
+                <p className="mb-4 text-secondary">
+                  Our furniture products are made with high quality materials,
+                  natural leather to ensure the best comfort.{" "}
                 </p>
-                <p>
-                  <a href="shop.html" className="btn">
+                <motion.button
+                  className="border-0"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <a href="#" className="btn">
                     Explore
                   </a>
-                </p>
+                </motion.button>
               </div>
               {/* End Column 1 */}
               {/* Start Column 2 */}
-              <div className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+              <div
+                className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0"
+                ref={product_ref}
+                style={{
+                  transform: isInProductView ? "none" : "translateY(200px)",
+                  opacity: isInProductView ? 1 : 0,
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.5s",
+                }}
+              >
                 <a className="product-item" href="cart.html">
                   <img
                     src="images/product-1.png"
@@ -74,7 +176,16 @@ const Home = () => {
               </div>
               {/* End Column 2 */}
               {/* Start Column 3 */}
-              <div className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+              <div
+                className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0"
+                ref={product_ref}
+                style={{
+                  transform: isInProductView ? "none" : "translateY(200px)",
+                  opacity: isInProductView ? 1 : 0,
+                  transition:
+                    "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.75s",
+                }}
+              >
                 <a className="product-item" href="cart.html">
                   <img
                     src="images/product-2.png"
@@ -89,7 +200,15 @@ const Home = () => {
               </div>
               {/* End Column 3 */}
               {/* Start Column 4 */}
-              <div className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+              <div
+                className="col-12 col-md-4 col-lg-3 mb-5 mb-md-0"
+                ref={product_ref}
+                style={{
+                  transform: isInProductView ? "none" : "translateY(200px)",
+                  opacity: isInProductView ? 1 : 0,
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2.0s",
+                }}
+              >
                 <a className="product-item" href="cart.html">
                   <img
                     src="images/product-3.png"
@@ -104,22 +223,39 @@ const Home = () => {
               </div>
               {/* End Column 4 */}
             </div>
-          </div>
+          </motion.div>
         </div>
         {/* End Product Section */}
+
         {/* Start Why Choose Us Section */}
-        <div className="why-choose-section">
+        <div
+          className="why-choose-section"
+          ref={wc_ref}
+          style={{
+            transform: isInWCView ? "none" : "translateX(-500px)",
+            opacity: isInWCView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+          }}
+        >
           <div className="container">
             <div className="row justify-content-between">
               <div className="col-lg-6">
                 <h2 className="section-title">Why Choose Us</h2>
                 <p>
-                  Donec vitae odio quis nisl dapibus malesuada. Nullam ac
-                  aliquet velit. Aliquam vulputate velit imperdiet dolor tempor
-                  tristique.
+                  Customers choose us because we provide the best quality
+                  products and impressive services.
                 </p>
                 <div className="row my-5">
-                  <div className="col-6 col-md-6">
+                  <div
+                    className="col-6 col-md-6"
+                    ref={wc_ref}
+                    style={{
+                      transform: isInWCView ? "none" : "translateX(-500px)",
+                      opacity: isInWCView ? 1 : 0,
+                      transition:
+                        "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1s",
+                    }}
+                  >
                     <div className="feature">
                       <div className="icon">
                         <img
@@ -130,12 +266,20 @@ const Home = () => {
                       </div>
                       <h3>Fast &amp; Free Shipping</h3>
                       <p>
-                        Donec vitae odio quis nisl dapibus malesuada. Nullam ac
-                        aliquet velit. Aliquam vulputate.
+                        We provide fast and free shipping for all our products.
                       </p>
                     </div>
                   </div>
-                  <div className="col-6 col-md-6">
+                  <div
+                    className="col-6 col-md-6"
+                    ref={wc_ref}
+                    style={{
+                      transform: isInWCView ? "none" : "translateX(-500px)",
+                      opacity: isInWCView ? 1 : 0,
+                      transition:
+                        "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.5s",
+                    }}
+                  >
                     <div className="feature">
                       <div className="icon">
                         <img
@@ -146,12 +290,21 @@ const Home = () => {
                       </div>
                       <h3>Easy to Shop</h3>
                       <p>
-                        Donec vitae odio quis nisl dapibus malesuada. Nullam ac
-                        aliquet velit. Aliquam vulputate.
+                        You can shop easily from anywhere. We provide services
+                        on both store and online.
                       </p>
                     </div>
                   </div>
-                  <div className="col-6 col-md-6">
+                  <div
+                    className="col-6 col-md-6"
+                    ref={wc_ref}
+                    style={{
+                      transform: isInWCView ? "none" : "translateX(-500px)",
+                      opacity: isInWCView ? 1 : 0,
+                      transition:
+                        "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2s",
+                    }}
+                  >
                     <div className="feature">
                       <div className="icon">
                         <img
@@ -162,12 +315,21 @@ const Home = () => {
                       </div>
                       <h3>24/7 Support</h3>
                       <p>
-                        Donec vitae odio quis nisl dapibus malesuada. Nullam ac
-                        aliquet velit. Aliquam vulputate.
+                        We provide 24/7 support for all our customers. You can
+                        contact us anytime for help.
                       </p>
                     </div>
                   </div>
-                  <div className="col-6 col-md-6">
+                  <div
+                    className="col-6 col-md-6"
+                    ref={wc_ref}
+                    style={{
+                      transform: isInWCView ? "none" : "translateX(-500px)",
+                      opacity: isInWCView ? 1 : 0,
+                      transition:
+                        "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2.5s",
+                    }}
+                  >
                     <div className="feature">
                       <div className="icon">
                         <img
@@ -178,8 +340,8 @@ const Home = () => {
                       </div>
                       <h3>Hassle Free Returns</h3>
                       <p>
-                        Donec vitae odio quis nisl dapibus malesuada. Nullam ac
-                        aliquet velit. Aliquam vulputate.
+                        Have a problem with our product? No worries, we provide
+                        hassle free returns.
                       </p>
                     </div>
                   </div>
@@ -198,55 +360,117 @@ const Home = () => {
           </div>
         </div>
         {/* End Why Choose Us Section */}
+
         {/* Start We Help Section */}
-        <div className="we-help-section">
+        <div
+          className="we-help-section"
+          ref={wh_ref}
+          style={{
+            transform: isInWHView ? "none" : "translateX(-500px)",
+            opacity: isInWHView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1s",
+          }}
+        >
           <div className="container">
             <div className="row justify-content-between">
               <div className="col-lg-7 mb-5 mb-lg-0">
                 <div className="imgs-grid">
                   <div className="grid grid-1">
-                    <img src="images/img-grid-1.jpg" alt="Untree.co" />
+                    <motion.img
+                      ref={wh_ref}
+                      style={{
+                        transform: isInWHView ? "none" : "translateY(200px)",
+                        opacity: isInWHView ? 1 : 0,
+                        transition:
+                          "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.5s",
+                      }}
+                      src="images/img-grid-1.jpg"
+                      alt="Untree.co"
+                    />
                   </div>
                   <div className="grid grid-2">
-                    <img src="images/img-grid-2.jpg" alt="Untree.co" />
+                    <motion.img
+                      ref={wh_ref}
+                      style={{
+                        transform: isInWHView ? "none" : "translateY(200px)",
+                        opacity: isInWHView ? 1 : 0,
+                        transition:
+                          "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2s",
+                      }}
+                      src="images/img-grid-2.jpg"
+                      alt="Untree.co"
+                    />
                   </div>
                   <div className="grid grid-3">
-                    <img src="images/img-grid-3.jpg" alt="Untree.co" />
+                    <motion.img
+                      ref={wh_ref}
+                      style={{
+                        transform: isInWHView ? "none" : "translateY(200px)",
+                        opacity: isInWHView ? 1 : 0,
+                        transition:
+                          "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2.5s",
+                      }}
+                      src="images/img-grid-3.jpg"
+                      alt="Untree.co"
+                    />
                   </div>
                 </div>
               </div>
               <div className="col-lg-5 ps-lg-5">
                 <h2 className="section-title mb-4">
-                  We Help You Make Modern Interior Design
+                  We Help You Make Your Modern Interior Design
                 </h2>
                 <p>
-                  Donec facilisis quam ut purus rutrum lobortis. Donec vitae
-                  odio quis nisl dapibus malesuada. Nullam ac aliquet velit.
-                  Aliquam vulputate velit imperdiet dolor tempor tristique.
-                  Pellentesque habitant morbi tristique senectus et netus et
-                  malesuada
+                  Explore the world of modern interior design with us!
+                  At Furni, we help you create your dream space with our elegant, modern, and high-quality furniture. 
+                  From luxurious sofas to cozy dining sets, we provide everything you need to turn your house into a perfect living space. 
+                  Discover our furniture collection today and start creating your dream space!
                 </p>
                 <ul className="list-unstyled custom-list my-4">
-                  <li>Donec vitae odio quis nisl dapibus malesuada</li>
-                  <li>Donec vitae odio quis nisl dapibus malesuada</li>
-                  <li>Donec vitae odio quis nisl dapibus malesuada</li>
-                  <li>Donec vitae odio quis nisl dapibus malesuada</li>
+                  <li>High quality materials used</li>
+                  <li>Luxurious and stylish design</li>
+                  <li>Modern and diverse furniture collection</li>
+                  <li>Excellent and efficient support services</li>
                 </ul>
-                <p>
+                <motion.button
+                  className="border-0 bg-transparent"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <a herf="#" className="btn">
                     Explore
                   </a>
-                </p>
+                </motion.button>
               </div>
             </div>
           </div>
         </div>
         {/* End We Help Section */}
+
         {/* Start Popular Product */}
-        <div className="popular-product">
+        <div className="popular-product py-5"
+          ref={popular_ref}
+          style={{
+            transform: isInPopularView ? "none" : "translateX(-500px)",
+            opacity: isInPopularView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1s",
+          }}
+        >
+          
           <div className="container">
+            <h2 className="section-title mb-4">
+                Our Popular Products
+            </h2>
             <div className="row">
-              <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+              <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0"
+                ref={popular_ref}
+                style={{
+                  transform: isInPopularView ? "none" : "translateY(200px)",
+                  opacity: isInPopularView ? 1 : 0,
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.5s",
+                }}
+              >
                 <div className="product-item-sm d-flex">
                   <div className="thumbnail">
                     <img
@@ -257,9 +481,8 @@ const Home = () => {
                   </div>
                   <div className="pt-3">
                     <h3>Nordic Chair</h3>
-                    <p>
-                      Donec facilisis quam ut purus rutrum lobortis. Donec vitae
-                      odio{" "}
+                    <p>Minimalist and modern Nordic chair, blending simplicity with comfort and style.
+                      {" "}
                     </p>
                     <p>
                       <a href="#">Read More</a>
@@ -267,7 +490,14 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+              <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0"
+                ref={popular_ref}
+                style={{
+                  transform: isInPopularView ? "none" : "translateY(200px)",
+                  opacity: isInPopularView ? 1 : 0,
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2s",
+                }}
+              >
                 <div className="product-item-sm d-flex">
                   <div className="thumbnail">
                     <img
@@ -279,8 +509,7 @@ const Home = () => {
                   <div className="pt-3">
                     <h3>Kruzo Aero Chair</h3>
                     <p>
-                      Donec facilisis quam ut purus rutrum lobortis. Donec vitae
-                      odio{" "}
+                    Sleek and sophisticated Kruzo Aero Chair, combining ergonomic design...{" "}
                     </p>
                     <p>
                       <a href="#">Read More</a>
@@ -288,7 +517,14 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+              <div className="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0"
+                ref={popular_ref}
+                style={{
+                  transform: isInPopularView ? "none" : "translateY(200px)",
+                  opacity: isInPopularView ? 1 : 0, 
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2.5s",
+                }}
+              >
                 <div className="product-item-sm d-flex">
                   <div className="thumbnail">
                     <img
@@ -300,8 +536,7 @@ const Home = () => {
                   <div className="pt-3">
                     <h3>Ergonomic Chair</h3>
                     <p>
-                      Donec facilisis quam ut purus rutrum lobortis. Donec vitae
-                      odio{" "}
+                    Ergonomic and modern Ergonomic Chair, designed for comfort and style...{" "}
                     </p>
                     <p>
                       <a href="#">Read More</a>
@@ -313,8 +548,10 @@ const Home = () => {
           </div>
         </div>
         {/* End Popular Product */}
+
         {/* Start Testimonial Slider */}
-        <div className="testimonial-section">
+
+        {/* <div className="testimonial-section">
           <div className="container">
             <div className="row">
               <div className="col-lg-7 mx-auto text-center">
@@ -332,8 +569,9 @@ const Home = () => {
                       <span className="fa fa-chevron-right" />
                     </span>
                   </div>
-                  <div className="testimonial-slider">
-                    <div className="item">
+                  {/*<div className="testimonial-slider">
+                  
+                    {/* <div className="item">
                       <div className="row justify-content-center">
                         <div className="col-lg-8 mx-auto">
                           <div className="testimonial-block text-center">
@@ -364,9 +602,9 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* END item */}
-                    <div className="item">
+                    {/* <div className="item">
                       <div className="row justify-content-center">
                         <div className="col-lg-8 mx-auto">
                           <div className="testimonial-block text-center">
@@ -397,9 +635,9 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* END item */}
-                    <div className="item">
+                    {/* <div className="item">
                       <div className="row justify-content-center">
                         <div className="col-lg-8 mx-auto">
                           <div className="testimonial-block text-center">
@@ -430,17 +668,26 @@ const Home = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* END item */}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  {/* </div> */} 
+                {/* </div> */}
+              {/* </div> */}
+            {/* </div> */}
+          {/* </div> */}
+        {/* </div> */}
+        
         {/* End Testimonial Slider */}
+
         {/* Start Blog Section */}
-        <div className="blog-section">
+        <div className="blog-section"
+          ref={blog_ref}
+          style={{ 
+            transform: isInBlogView ? "none" : "translateX(-500px)",
+            opacity: isInBlogView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+          }}
+        >
           <div className="container">
             <div className="row mb-5">
               <div className="col-md-6">
@@ -453,7 +700,14 @@ const Home = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+              <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0"
+                ref={blog_ref}
+                style={{ 
+                  transform: isInBlogView ? "none" : "translateY(200px)",
+                  opacity: isInBlogView ? 1 : 0,
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1s",
+                }}
+                >
                 <div className="post-entry">
                   <a href="#" className="post-thumbnail">
                     <img
@@ -477,7 +731,14 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+              <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0"
+                ref={blog_ref}
+                style={{ 
+                  transform: isInBlogView ? "none" : "translateY(200px)",
+                  opacity: isInBlogView ? 1 : 0,
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.5s",
+                }}
+                >
                 <div className="post-entry">
                   <a href="#" className="post-thumbnail">
                     <img
@@ -501,7 +762,14 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+              <div className="col-12 col-sm-6 col-md-4 mb-4 mb-md-0"
+                ref={blog_ref}
+                style={{ 
+                  transform: isInBlogView ? "none" : "translateY(200px)",
+                  opacity: isInBlogView ? 1 : 0,
+                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 2s",
+                }}
+                >
                 <div className="post-entry">
                   <a href="#" className="post-thumbnail">
                     <img
