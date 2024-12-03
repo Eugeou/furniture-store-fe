@@ -8,7 +8,9 @@
 
 # Preview
 
-![Screenshot 2024-12-02 221329](https://github.com/user-attachments/assets/f313b61b-c899-4e05-b391-32b7a57c8da2)
+![home-page](https://github.com/user-attachments/assets/5112a9ad-2be4-415d-b039-24a2e2be0959)
+#
+
 
 ## Available Scripts
 
