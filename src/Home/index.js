@@ -68,15 +68,15 @@ const Home = () => {
             }}
           >
             <div className="row justify-content-between">
-              <div className="col-lg-6 py-5">
+              <div className="col-lg-6 py-2">
                 <div className="intro-excerpt">
                   <h1>
                     Modern Furni
                     <span class="d-block">Best choice for you!</span>
                   </h1>
-                  <h2 className="mb-4 text-secondary">
+                  <h3 className="mb-4 text-white">
                     Visit out website and explore our best products and offers now!
-                  </h2>
+                  </h3>
                   <p>
                     <motion.button
                       className="border-0 bg-transparent hover:border-0"
@@ -102,7 +102,7 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="col-lg-6 py-5"
+              <div className="col-lg-6 py-2"
                 ref={hero_ref}
                 style={{
                   transform: isInHeroView ? "translateY(0px)" : "translateY(200px)",

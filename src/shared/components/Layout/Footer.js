@@ -33,7 +33,9 @@ const Footer = ()=>{
     <div className="row g-5 mb-5">
       <div className="col-lg-4">
         <div className="mb-4 footer-logo-wrap"><a href="#" className="footer-logo">Furni<span>.</span></a></div>
-        <p className="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant</p>
+        <p className="mb-4">Explore the world of modern interior design with us!
+                  At Furni, we help you create your dream space with our elegant, modern, and high-quality furniture. 
+                  Discover our furniture collection today and start creating your dream space!</p>
         <ul className="list-unstyled custom-social">
           <li><a href="#"><span className="fa fa-brands fa-facebook-f" /></a></li>
           <li><a href="#"><span className="fa fa-brands fa-twitter" /></a></li>
