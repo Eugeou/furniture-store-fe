@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux-setup/store";
+
 
 // import page
 import Header from "./shared/components/Layout/Header";
@@ -30,7 +30,7 @@ const App = () => {
 
     return(
       <div>
-        <motion.div className=" progress-bar position-fixed top-0 left-0 right-0 p-1" style={{scaleX, width: "100%", background: "#2ae3cd", transformOrigin: "0%"}}></motion.div>
+        <motion.div style={{scaleX, width: "100%", background: "#2ae3cd", transformOrigin: "0%", padding: "5px", position: "fixed", zIndex: 999}}></motion.div>
         {!noHeaderFooter.includes(location.pathname) && <Header/>}
           <Routes>
             <Route path="/" element={<Home/>}/>
