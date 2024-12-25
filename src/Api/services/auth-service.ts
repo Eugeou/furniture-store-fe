@@ -39,7 +39,7 @@ import { BASE_API } from "../../shared/components/constants/app";
 // // }
 
 export const login = async (bodyLogin: StoreLogin) => {
-    const loginURL = BASE_API + "/auth/login";
+    const loginURL = BASE_API + "/auth/signin";
     try {
         const response = await axios.post(loginURL, bodyLogin);
         return response;
@@ -81,10 +81,13 @@ export const logout = async (userId: string)=> {
   return data;
 }
 
-export const GetMe = async ()=> {
-  const { data } = await axiosClient.get(BASE_API + '/auth/me', {
-    baseURL: BASE_API
-  })
+export const GetMe = async (id : string)=> {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const { data } = await axiosClient.post(BASE_API + '/auth/me', JSON.stringify(id), config)
   return data
 }
   

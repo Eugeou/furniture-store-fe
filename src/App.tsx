@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
+
 
 
 // import page
@@ -16,7 +16,9 @@ import Contact from "./Contact";
 import Services from "./Services";
 import Shop from "./Shop";
 import ProductDetail from "./ProductDetail";
+import LoginPage from "./Auth/Login";
 import { motion, useScroll, useSpring } from "framer-motion";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const location = useLocation();
@@ -44,6 +46,7 @@ const App = () => {
             <Route path="/shop" element={<Shop/>}
             />
             <Route path="/productdetail" element={<ProductDetail/>}/>
+            <Route path="/signin" element={<LoginPage/>}/>
 
             
             {/* <Route path="*" element={<NotFound/>}/> */}
@@ -57,6 +60,9 @@ const App = () => {
 function AppWrapper() {
   return (
     <BrowserRouter basename="/">
+      <ToastContainer 
+                position="top-center"
+      />
       <App />
     </BrowserRouter>
   );
