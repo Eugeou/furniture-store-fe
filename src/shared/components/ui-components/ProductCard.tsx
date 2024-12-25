@@ -1,5 +1,7 @@
 import React from "react";
 import { ProductGet } from "../../../Api/types/entities/product-entity";
+import { Image } from "antd";
+import { useNavigate } from "react-router-dom";
 
 export type ProductCardProps = {
   product: ProductGet;
@@ -7,6 +9,12 @@ export type ProductCardProps = {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   // Lấy số đầu tiên từ DisplayPrice và định dạng
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/productdetail", { state: { product } });
+  };
+
   const formatPrice = (price: string) => {
     const firstPrice = price.split(" - ")[0]; // Lấy số đầu tiên
     return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(firstPrice));
@@ -14,9 +22,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div className="col-12 col-md-4 col-lg-3 mb-5">
-      <a className="product-item border rounded" href={`/products/${product.Id}`}>
+      <div className="product-item border rounded" onClick={handleClick}>
         {/* Product Image */}
-        <img
+        <Image
           src={product.ImageSource || "images/default-product.png"}
           alt={product.ProductName}
           className="img-fluid product-thumbnail"
@@ -44,13 +52,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </strong>
 
         {/* Product Brand */}
-        <p className="text-sm text-gray-500">{product.BrandName}</p>
+        <p className="text-sm text-gray-500 font-italic">{product.BrandName}</p>
 
         {/* Cross Icon */}
         <span className="icon-cross">
           <img src="images/cross.svg" className="img-fluid" alt="Cross Icon" />
         </span>
-      </a>
+      </div>
     </div>
   );
 };

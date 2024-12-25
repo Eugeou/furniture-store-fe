@@ -5,7 +5,7 @@ const Header = ()=>{
   return(
     <>
     {/* Start Header/Navigation */}
-<nav className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+<nav className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar" style={{borderBottom: "1px solid rgba(255,255,255,.1)"}}>
   <div className="container">
     <a className="navbar-brand" href="http://localhost:3000/">Furni<span>.</span></a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">

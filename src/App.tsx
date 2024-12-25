@@ -15,6 +15,7 @@ import Cart from "./Cart";
 import Contact from "./Contact";
 import Services from "./Services";
 import Shop from "./Shop";
+import ProductDetail from "./ProductDetail";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const App = () => {
@@ -40,7 +41,10 @@ const App = () => {
             <Route path="/cart" element={<Cart/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/services" element={<Services/>}/>
-            <Route path="/shop" element={<Shop/>}/>
+            <Route path="/shop" element={<Shop/>}
+            />
+            <Route path="/productdetail" element={<ProductDetail/>}/>
+
             
             {/* <Route path="*" element={<NotFound/>}/> */}
 
@@ -52,7 +56,7 @@ const App = () => {
 
 function AppWrapper() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <App />
     </BrowserRouter>
   );
