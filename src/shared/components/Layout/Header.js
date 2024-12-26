@@ -44,13 +44,13 @@ const Header = ()=>{
             <p className='text-primary'>{user?.FullName}</p>
         </Menu.Item> */}
         <Menu.Item key="profile" icon={<UserOutlined />}>
-            <Link href="/profile">Your Profile</Link>
+            <a href="/profile">Your Profile</a>
         </Menu.Item>
         <Menu.Item key="settings" icon={<SettingOutlined />}>
-            <Link href={`/setting/`}>Settings</Link>
+            <a href={`/address`}>Settings</a>
         </Menu.Item>
         <Menu.Item key="help" icon={<QuestionCircleOutlined />}>
-            <Link href="/help">Help</Link>
+            <a href="/contact">Help</a>
         </Menu.Item>
         <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
             Sign out

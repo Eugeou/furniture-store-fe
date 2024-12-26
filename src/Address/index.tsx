@@ -219,7 +219,7 @@ const AddressPage: React.FC = () => {
 
       <Modal 
         title={isEdit ? 'Edit Address' : 'Add New Address'} 
-        visible={isModalVisible} 
+        open={isModalVisible} 
         onCancel={handleCancel} 
         footer={null}
       >
