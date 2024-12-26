@@ -7,6 +7,9 @@ import { Image, Button, Input, Tag } from "antd";
 import { GetAllProducts } from "../Api/services/product-service";
 import ProductCard from "../shared/components/ui-components/ProductCard";
 import { useLocation } from "react-router-dom";
+import { createCart } from "../Api/services/cart-service";
+import { AddToWishlist } from "../Api/services/wishlist-service";
+import { notification, Checkbox } from "antd";
 
 import { BsFillShieldFill } from "react-icons/bs";
 import { BsCartPlus } from "react-icons/bs";
@@ -16,6 +19,7 @@ import { BsFillPersonLinesFill } from "react-icons/bs";
 import { BsFillStickiesFill } from "react-icons/bs";
 import { BsFillHeartFill } from "react-icons/bs";
 import { BsBook } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 
 
@@ -24,28 +28,72 @@ const ProductDetail = () => {
   const { data: products } = useSWR(`${BASE_API}/product`, GetAllProducts, { fallbackData: [] });
 
 
-  const [quantity, setQuantity] = useState(1);
+  //const [quantity, setQuantity] = useState(1);
   //const product = products.find((p) => p.Id === id);
   const location = useLocation();
+
+  const [selectedVariant, setSelectedVariant] = useState(null); // Lưu variant được chọn
+  const [quantities, setQuantities] = useState({}); // Lưu số lượng của từng variant
+
   const product = location.state?.product;
+  const userId = localStorage.getItem("userId");
 
   if (!product) {
     return <div>Product not found</div>;
   }
 
-  
+  const handleQuantityChange = (variantId, change) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [variantId]: Math.max(1, (prev[variantId] || 1) + change),
+    }));
+  };
+
+  const handleAddToCart = async () => {
+    if (!selectedVariant) {
+      notification.error({ message: "Vui lòng chọn một variant!" });
+      return;
+    }
+    const quantity = quantities[selectedVariant.Id] || 1;
+    if (quantity <= 0) {
+      notification.error({ message: "Vui lòng nhập số lượng hợp lệ!" });
+      return;
+    }
+    try {
+      await createCart(userId, {
+        productId: product.Id,
+        colorId: selectedVariant.ColorId,
+        dimension: selectedVariant.DisplayDimension,
+        quantity,
+      });
+      toast.success("Thêm sản phẩm vào giỏ hàng thành công!");
+    } catch (error) {
+      toast.error("Thêm sản phẩm vào giỏ hàng thất bại!");
+    }
+  };
+
+  const handleAddToWishlist = async () => {
+    try {
+      await AddToWishlist(userId, product.Id);
+      toast.success("Thêm sản phẩm vao wishlist thành công!");
+    } catch (error) {
+      toast.error("Thêm sản phẩm vào wishlist thất bại!");
+    }
+  };
 
   // Suggested products filtered by category
   const suggestedProducts = products.filter((p) => p.CategoryName === product.CategoryName && p.Id !== product.Id);
 
-  const handleQuantityChange = (change) => {
-    setQuantity((prev) => Math.max(1, prev + change));
-  };
+  // const handleQuantityChange = (change) => {
+  //   setQuantity((prev) => Math.max(1, prev + change));
+  // };
 
   const formatPrice = (price) => {
     const firstPrice = price.split(" - ")[0];
     return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(firstPrice));
   };
+
+  
 
   return (
     <div className="container mt-5">
@@ -103,8 +151,8 @@ const ProductDetail = () => {
             <Button type="default" className="mr-4 p-4 text-white" style={{ backgroundColor: "#3b5d50" }}>
               Buy Now
             </Button>
-            <Button className="d-flex align-items-center justify-content-center ms-4 p-4 border border-danger"> <BsCartPlus className="mt-1 text-danger fw-bold" />  <p className=" text-center text-danger fw-bold" style={{ height: "100%"}}>Add to Cart</p></Button>
-            <Button className="d-flex align-items-center justify-content-center ms-4 p-4 border border-danger"> <BsFillHeartFill className="mt-1 text-danger fw-bold" />  <p className=" text-center text-danger fw-bold" style={{ height: "100%"}}>Wishlist</p></Button>
+            <Button className="d-flex align-items-center justify-content-center ms-4 p-4 border border-danger"> <BsCartPlus className="mt-1 text-danger fw-bold" />  <p className=" text-center text-danger fw-bold" style={{ height: "100%"}} onClick={handleAddToCart}>Add to Cart</p></Button>
+            <Button className="d-flex align-items-center justify-content-center ms-4 p-4 border border-danger"> <BsFillHeartFill className="mt-1 text-danger fw-bold" />  <p className=" text-center text-danger fw-bold" style={{ height: "100%"}} onClick={handleAddToWishlist}>Wishlist</p></Button>
           </div>
         </div>
       </div>
@@ -112,35 +160,38 @@ const ProductDetail = () => {
       {/* Product Variants Section */}
       <div className="mt-5">
         <h3>Product Variants</h3>
-        {product.ProductVariants.map((variant) => (
+        {product?.ProductVariants.map((variant) => (
           <div key={variant.Id} className="d-flex justify-content-between align-items-center border rounded p-3 mb-3 mt-4">
             <div className="d-flex align-items-center">
-            <Image
-              src={variant.ImageSource[0] || "images/default-product.png"}
-              alt={variant.ColorName}
-              className="img-fluid"
-              width={125}
-              height={125}
-            />
-            <div className="ms-5">
-              <h4>{variant.ColorName}</h4>
-              <p> <strong>Size: </strong>{variant.DisplayDimension}</p>
-              <p> <strong>Price: </strong>{formatPrice(variant.Price.toString())}</p>
-              <p> <strong>Stock: </strong>{variant.Quantity}</p>
-              
-          </div>
-            </div>
-            
-            <div className="d-flex align-items-center">
-                <Button onClick={() => handleQuantityChange(-1)}>-</Button>
-                <Input
-                  value={quantity}
-                  className="mx-2 text-center"
-                  readOnly
-                  style={{ width: 50 }}
-                />
-                <Button onClick={() => handleQuantityChange(1)}>+</Button>
+              <Checkbox
+                checked={selectedVariant?.Id === variant.Id}
+                onChange={() => setSelectedVariant(variant)}
+                
+              />
+              <Image
+                src={variant.ImageSource[0] || "images/default-product.png"}
+                alt={variant.ColorName}
+                className="img-fluid ms-4"
+                width={125}
+                height={125}
+              />
+              <div className="ms-5">
+                <h4>{variant.ColorName}</h4>
+                <p><strong>Size: </strong>{variant.DisplayDimension}</p>
+                <p><strong>Price: </strong>{variant.Price}</p>
+                <p><strong>Stock: </strong>{variant.Quantity}</p>
               </div>
+            </div>
+            <div className="d-flex align-items-center">
+              <Button onClick={() => handleQuantityChange(variant.Id, -1)}>-</Button>
+              <Input
+                value={quantities[variant.Id] || 1}
+                className="mx-2 text-center"
+                readOnly
+                style={{ width: 50 }}
+              />
+              <Button onClick={() => handleQuantityChange(variant.Id, 1)}>+</Button>
+            </div>
           </div>
         ))}
       </div>

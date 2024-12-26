@@ -11,7 +11,7 @@ import Footer from "./shared/components/Layout/Footer";
 import Checkout from "./Checkout";
 import About from "./About";
 import Blog from "./Blog";
-import Cart from "./Cart";
+import CartPage from "./Cart";
 import Contact from "./Contact";
 import Services from "./Services";
 import Shop from "./Shop";
@@ -40,7 +40,7 @@ const App = () => {
             <Route path="/checkout" element={<Checkout/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/blog" element={<Blog/>}/>
-            <Route path="/cart" element={<Cart/>}/>
+            <Route path="/cart" element={<CartPage/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/services" element={<Services/>}/>
             <Route path="/shop" element={<Shop/>}

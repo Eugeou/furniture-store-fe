@@ -16,7 +16,7 @@ const Header = ()=>{
     if (userId) {
       GetMe(userId).then((response) => {
         console.log(response);
-        setUser(response.data);
+        setUser(response?.data);
       });
     }
   }, [userId]);
@@ -40,9 +40,9 @@ const Header = ()=>{
   
   const userMenu = (
     <Menu>
-        <Menu.Item key="dashboard" icon={<DashboardOutlined />}>
+        {/* <Menu.Item key="dashboard" icon={<DashboardOutlined />}>
             <p className='text-primary'>{user?.FullName}</p>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item key="profile" icon={<UserOutlined />}>
             <Link href="/profile">Your Profile</Link>
         </Menu.Item>

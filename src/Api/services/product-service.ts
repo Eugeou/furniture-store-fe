@@ -15,3 +15,4 @@ export const GetDetailProduct = async (id: string): Promise<ProductGet> => {
   const { data } = await axiosClient.get(`/product/${id}`);
   return data;
 };
+
