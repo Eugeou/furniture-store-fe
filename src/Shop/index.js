@@ -9,6 +9,10 @@ import { GetAllBrand } from "../Api/services/brand-service";
 import ProductCard from "../shared/components/ui-components/ProductCard";
 import { Input, Select, Button, Form, Row, Col, Image, Flex } from "antd";
 
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import { motion } from "framer-motion";
+
 const { Option } = Select;
 
 const Shop = ()=>{
@@ -16,6 +20,9 @@ const Shop = ()=>{
   const { data: categories, isLoadingCategories } = useSWR(`${BASE_API}/category`, GetAllCategory, { fallbackData: [] });
   const { data: brands, isLoadingBrands } = useSWR(`${BASE_API}/brand`, GetAllBrand, { fallbackData: [] });
   console.log(products);
+
+  const hero_ref = useRef();
+  const isInHeroView = useInView(hero_ref, { once: true });
 
   const [filters, setFilters] = useState({
     sort: "default",
@@ -57,9 +64,18 @@ const Shop = ()=>{
     <>
     <div>
       {/* Start Hero Section */}
-      <div className="hero">
+      <motion.div className="hero"layout
+          className="hero"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}>
         
-        <div className="container">
+        <div className="container" ref={hero_ref}
+            style={{
+              transform: isInHeroView ? "translateY(0px)" : "translateY(200px)",
+              opacity: isInHeroView ? 1 : 0,
+              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+            }}>
           <div className="row justify-content-between">
             <div>
               
@@ -160,7 +176,7 @@ const Shop = ()=>{
             
           </div>
         </div>
-      </div>
+      </motion.div>
       {/* End Hero Section */}
       <div className="untree_co-section product-section before-footer-section">
         <div className="container">

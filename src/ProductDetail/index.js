@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { BASE_API } from "../shared/components/constants/app";
@@ -21,13 +21,21 @@ import { BsFillHeartFill } from "react-icons/bs";
 import { BsBook } from "react-icons/bs";
 import { toast } from "react-toastify";
 
+import { useRef } from "react";
+import { useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 
 
 const ProductDetail = () => {
   // const { id } = useParams(); // Get product ID from route params
   const { data: products } = useSWR(`${BASE_API}/product`, GetAllProducts, { fallbackData: [] });
 
+  const hero_ref = useRef();
+  const isInHeroView = useInView(hero_ref, { once: true });
 
+  const navigate = useNavigate();
   //const [quantity, setQuantity] = useState(1);
   //const product = products.find((p) => p.Id === id);
   const location = useLocation();
@@ -72,6 +80,32 @@ const ProductDetail = () => {
     }
   };
 
+  const handleBuyNow = async () => {
+    if (!selectedVariant) {
+      notification.error({ message: "Vui lòng chọn một variant!" });
+      return;
+    }
+    const quantity = quantities[selectedVariant.Id] || 1;
+    if (quantity <= 0) {
+      notification.error({ message: "Vui lòng nhập số lượng hợp lệ!" });
+      return;
+    }
+    try {
+      await createCart(userId, {
+        productId: product.Id,
+        colorId: selectedVariant.ColorId,
+        dimension: selectedVariant.DisplayDimension,
+        quantity,
+      });
+      navigate("/cart");
+      //toast.success("Thêm sản phẩm vào giỏ hàng thành công!");
+      
+    } catch (error) {
+      toast.error("Thêm sản phẩm vào giỏ hàng thất bại!");
+    }
+  };
+
+
   const handleAddToWishlist = async () => {
     try {
       await AddToWishlist(userId, product.Id);
@@ -96,7 +130,12 @@ const ProductDetail = () => {
   
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" ref={hero_ref}
+    style={{
+      transform: isInHeroView ? "translateY(0px)" : "translateY(200px)",
+      opacity: isInHeroView ? 1 : 0,
+      transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+    }}>
       {/* Product Thumbnail and Info Section */}
       <div className="row">
         {/* Left: Thumbnail and Variant Images */}
@@ -148,7 +187,7 @@ const ProductDetail = () => {
             <span className="text-danger font-weight-bold">15-Day Free Return </span>
           </Tag>
           <div className="d-flex mt-4" style={{ width: "100%" }}>
-            <Button type="default" className="mr-4 p-4 text-white" style={{ backgroundColor: "#3b5d50" }}>
+            <Button type="default" className="mr-4 p-4 text-white" style={{ backgroundColor: "#3b5d50" }} onClick={handleBuyNow}>
               Buy Now
             </Button>
             <Button className="d-flex align-items-center justify-content-center ms-4 p-4 border border-danger"> <BsCartPlus className="mt-1 text-danger fw-bold" />  <p className=" text-center text-danger fw-bold" style={{ height: "100%"}} onClick={handleAddToCart}>Add to Cart</p></Button>
@@ -161,7 +200,7 @@ const ProductDetail = () => {
       <div className="mt-5">
         <h3>Product Variants</h3>
         {product?.ProductVariants.map((variant) => (
-          <div key={variant.Id} className="d-flex justify-content-between align-items-center border rounded p-3 mb-3 mt-4">
+          <div key={variant.Id} className="d-flex justify-content-between align-items-center p-3 mb-3 mt-4" style={{ border: "1px solid #3b5d50", borderRadius: "30px" }}>
             <div className="d-flex align-items-center">
               <Checkbox
                 checked={selectedVariant?.Id === variant.Id}

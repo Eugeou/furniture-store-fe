@@ -47,23 +47,23 @@ const Footer = ()=>{
         <div className="row links-wrap">
           <div className="col-6 col-sm-6 col-md-3">
             <ul className="list-unstyled">
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Contact us</a></li>
+              <li><a href="/about">About us</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/contact">Contact us</a></li>
             </ul>
           </div>
           <div className="col-6 col-sm-6 col-md-3">
             <ul className="list-unstyled">
-              <li><a href="#">Support</a></li>
-              <li><a href="#">Knowledge base</a></li>
+              <li><a href="/about">Support</a></li>
+              <li><a href="/blog">Knowledge base</a></li>
               <li><a href="#">Live chat</a></li>
             </ul>
           </div>
           <div className="col-6 col-sm-6 col-md-3">
             <ul className="list-unstyled">
               <li><a href="#">Jobs</a></li>
-              <li><a href="#">Our team</a></li>
+              <li><a href="/about">Our team</a></li>
               <li><a href="#">Leadership</a></li>
               <li><a href="#">Privacy Policy</a></li>
             </ul>

@@ -1,13 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 const About = ()=>{
+  const hero_ref = useRef();
+  const isInHeroView = useInView(hero_ref, { once: true });
   return(
+
     <>
     <div>
   {/* Start Hero Section */}
-  <div className="hero">
-    <div className="container">
+  <motion.div
+          layout
+          className="hero"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+    <div className="container"
+    ref={hero_ref}
+    style={{
+      transform: isInHeroView ? "translateY(0px)" : "translateY(200px)",
+      opacity: isInHeroView ? 1 : 0,
+      transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+    }}>
       <div className="row justify-content-between">
         <div className="col-lg-5">
           <div className="intro-excerpt">
@@ -23,7 +41,7 @@ const About = ()=>{
         </div>
       </div>
     </div>
-  </div>
+  </motion.div>
   {/* End Hero Section */}
   {/* Start Why Choose Us Section */}
   <div className="why-choose-section">
@@ -90,7 +108,7 @@ const About = ()=>{
           <h2 className="section-title">Our Team</h2>
         </div>
       </div>
-      <div className="row">
+      <div className="row align-items-center">
         {/* Start Column 1 */}
         <div className="col-12 col-md-6 col-lg-3 mb-5 mb-md-0">
           <img height={340} width={300} src="images/avatar-removebg.jpg" className=" mb-5" />

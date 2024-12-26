@@ -1,19 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Contact = ()=>{
+  const hero_ref = useRef();
+  const isInHeroView = useInView(hero_ref, { once: true });
+
   return(
     <>
     <div>
   {/* Start Hero Section */}
-  <div className="hero">
-    <div className="container">
+  <motion.div 
+    layout
+    className="hero"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    ref={hero_ref}
+    transition={{ duration: 1.5 }}
+    >
+    <div className="container" ref={hero_ref}
+            style={{
+              transform: isInHeroView ? "translateY(0px)" : "translateY(200px)",
+              opacity: isInHeroView ? 1 : 0,
+              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+            }}>
       <div className="row justify-content-between">
         <div className="col-lg-5">
           <div className="intro-excerpt">
             <h1>Contact</h1>
-            <p className="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-            <p><a href className="btn btn-secondary me-2">Shop Now</a><a href="#" className="btn btn-white-outline">Explore</a></p>
+            <p className="mb-4">Want to get in touch? We'd love to hear from you! Drop us a line and we'll get back to you as soon as possible.</p>
+            <p><a href="#contactForm" className="btn btn-secondary me-2">Contact Us</a><a href="#" className="btn btn-white-outline">Explore</a></p>
           </div>
         </div>
         <div className="col-lg-7">
@@ -23,7 +41,7 @@ const Contact = ()=>{
         </div>
       </div>
     </div>
-  </div>
+  </motion.div>
   {/* End Hero Section */}
   {/* Start Contact Form */}
   <div className="untree_co-section">
@@ -40,7 +58,7 @@ const Contact = ()=>{
                     </svg>
                   </div> {/* /.icon */}
                   <div className="service-contents">
-                    <p>43 Raymouth Rd. Baltemoer, London 3910</p>
+                    <p>Linh Trung ward, Thu Duc district, Ho Chi Minh City</p>
                   </div> {/* /.service-contents*/}
                 </div> {/* /.service */}
               </div>
@@ -52,7 +70,7 @@ const Contact = ()=>{
                     </svg>
                   </div> {/* /.icon */}
                   <div className="service-contents">
-                    <p>info@yourdomain.com</p>
+                    <p>qn694810@gmail.com</p>
                   </div> {/* /.service-contents*/}
                 </div> {/* /.service */}
               </div>
@@ -64,12 +82,13 @@ const Contact = ()=>{
                     </svg>
                   </div> {/* /.icon */}
                   <div className="service-contents">
-                    <p>+1 294 3925 3939</p>
+                    <p>+84 28 250 1497</p>
                   </div> {/* /.service-contents*/}
                 </div> {/* /.service */}
               </div>
             </div>
-            <form>
+            <form id="contactForm" >
+              <h4 className="mb-3">Contact Form</h4>
               <div className="row">
                 <div className="col-6">
                   <div className="form-group">
