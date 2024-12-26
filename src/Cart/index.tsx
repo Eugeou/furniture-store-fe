@@ -106,7 +106,7 @@ const CartPage = () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((item) => (
+              {cartItems.length > 0 ? cartItems.map((item) => (
                 <tr key={item.Id}>
                   <td>
                     <img
@@ -171,16 +171,25 @@ const CartPage = () => {
                     </button>
                   </td>
                 </tr>
-              ))}
+              ))
+                : (
+                  <tr>
+                    <td className="text-center p-5 fs-5" colSpan={7}>Opps! No items in cart!  <Link className="btn btn-primary" to="/shop">Shop Now</Link></td>
+                  </tr>
+                )
+
+              
+              }
+
             </tbody>
           </table>
         </div>
         {/* Cart Total */}
-        <div className="text-right">
+        <div className="text-right mt-5">
           <h4>Total: {cartTotal.toLocaleString()} ₫</h4>
         </div>
         {/* Actions */}
-        <div className="mt-3">
+        <div className="mt-4 mb-5">
           <button
             className="btn btn-primary"
             onClick={() =>

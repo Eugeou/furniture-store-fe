@@ -12,7 +12,7 @@ const About = ()=>{
         <div className="col-lg-5">
           <div className="intro-excerpt">
             <h1>About Us</h1>
-            <p className="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+            <p className="mb-4">Explore the world of modern interior design with us! At Furni, we help you create your dream space with our elegant, modern, and high-quality furniture. From luxurious sofas to cozy dining sets, we provide everything you need to turn your house into a perfect living space. Discover our furniture collection today and start creating your dream space!</p>
             <p><a href className="btn btn-secondary me-2">Shop Now</a><a href="#" className="btn btn-white-outline">Explore</a></p>
           </div>
         </div>
@@ -31,7 +31,7 @@ const About = ()=>{
       <div className="row justify-content-between align-items-center">
         <div className="col-lg-6">
           <h2 className="section-title">Why Choose Us</h2>
-          <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+          <p>Customers choose us because we provide the best quality products and impressive services.</p>
           <div className="row my-5">
             <div className="col-6 col-md-6">
               <div className="feature">
@@ -39,7 +39,7 @@ const About = ()=>{
                   <img src="images/truck.svg" alt="Image" className="imf-fluid" />
                 </div>
                 <h3>Fast &amp; Free Shipping</h3>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                <p>We provide fast and free shipping for all our products.</p>
               </div>
             </div>
             <div className="col-6 col-md-6">
@@ -48,7 +48,9 @@ const About = ()=>{
                   <img src="images/bag.svg" alt="Image" className="imf-fluid" />
                 </div>
                 <h3>Easy to Shop</h3>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                <p>You can shop easily from anywhere. We provide services on both store and online.
+
+                </p>
               </div>
             </div>
             <div className="col-6 col-md-6">
@@ -57,7 +59,7 @@ const About = ()=>{
                   <img src="images/support.svg" alt="Image" className="imf-fluid" />
                 </div>
                 <h3>24/7 Support</h3>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                <p>We provide 24/7 support for all our customers. You can contact us anytime for help.</p>
               </div>
             </div>
             <div className="col-6 col-md-6">
@@ -66,7 +68,7 @@ const About = ()=>{
                   <img src="images/return.svg" alt="Image" className="imf-fluid" />
                 </div>
                 <h3>Hassle Free Returns</h3>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                <p>Have a problem with our product? No worries, we provide hassle free returns.</p>
               </div>
             </div>
           </div>
@@ -91,9 +93,9 @@ const About = ()=>{
       <div className="row">
         {/* Start Column 1 */}
         <div className="col-12 col-md-6 col-lg-3 mb-5 mb-md-0">
-          <img src="images/person_1.jpg" className="img-fluid mb-5" />
-          <h3 clas><a href="#"><span className>Lawson</span> Arnold</a></h3>
-          <span className="d-block position mb-4">CEO, Founder, Atty.</span>
+          <img height={340} width={300} src="images/avatar-removebg.jpg" className=" mb-5" />
+          <h3 clas><a href="#"><span className>Quan Nguyen</span> </a></h3>
+          <span className="d-block position mb-4">CEO, Founder.</span>
           <p>Separated they live in.
             Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
           <p className="mb-0"><a href="#" className="more dark">Learn More <span className="icon-arrow_forward" /></a></p>
@@ -101,118 +103,20 @@ const About = ()=>{
         {/* End Column 1 */}
         {/* Start Column 2 */}
         <div className="col-12 col-md-6 col-lg-3 mb-5 mb-md-0">
-          <img src="images/person_2.jpg" className="img-fluid mb-5" />
-          <h3 clas><a href="#"><span className>Jeremy</span> Walker</a></h3>
-          <span className="d-block position mb-4">CEO, Founder, Atty.</span>
+          <img height={340} width={300} src="images/avatar-sonle.png" className=" mb-5" />
+          <h3 clas><a href="#"><span className>Son </span>Le</a></h3>
+          <span className="d-block position mb-4">CEO, Founder.</span>
           <p>Separated they live in.
             Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
           <p className="mb-0"><a href="#" className="more dark">Learn More <span className="icon-arrow_forward" /></a></p>
         </div> 
         {/* End Column 2 */}
-        {/* Start Column 3 */}
-        <div className="col-12 col-md-6 col-lg-3 mb-5 mb-md-0">
-          <img src="images/person_3.jpg" className="img-fluid mb-5" />
-          <h3 clas><a href="#"><span className>Patrik</span> White</a></h3>
-          <span className="d-block position mb-4">CEO, Founder, Atty.</span>
-          <p>Separated they live in.
-            Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-          <p className="mb-0"><a href="#" className="more dark">Learn More <span className="icon-arrow_forward" /></a></p>
-        </div> 
-        {/* End Column 3 */}
-        {/* Start Column 4 */}
-        <div className="col-12 col-md-6 col-lg-3 mb-5 mb-md-0">
-          <img src="images/person_4.jpg" className="img-fluid mb-5" />
-          <h3 clas><a href="#"><span className>Kathryn</span> Ryan</a></h3>
-          <span className="d-block position mb-4">CEO, Founder, Atty.</span>
-          <p>Separated they live in.
-            Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-          <p className="mb-0"><a href="#" className="more dark">Learn More <span className="icon-arrow_forward" /></a></p>
-        </div> 
-        {/* End Column 4 */}
+        
       </div>
     </div>
   </div>
   {/* End Team Section */}
-  {/* Start Testimonial Slider */}
-  <div className="testimonial-section before-footer-section">
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-7 mx-auto text-center">
-          <h2 className="section-title">Testimonials</h2>
-        </div>
-      </div>
-      <div className="row justify-content-center">
-        <div className="col-lg-12">
-          <div className="testimonial-slider-wrap text-center">
-            <div id="testimonial-nav">
-              <span className="prev" data-controls="prev"><span className="fa fa-chevron-left" /></span>
-              <span className="next" data-controls="next"><span className="fa fa-chevron-right" /></span>
-            </div>
-            <div className="testimonial-slider">
-              <div className="item">
-                <div className="row justify-content-center">
-                  <div className="col-lg-8 mx-auto">
-                    <div className="testimonial-block text-center">
-                      <blockquote className="mb-5">
-                        <p>“Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.”</p>
-                      </blockquote>
-                      <div className="author-info">
-                        <div className="author-pic">
-                          <img src="images/person-1.png" alt="Maria Jones" className="img-fluid" />
-                        </div>
-                        <h3 className="font-weight-bold">Maria Jones</h3>
-                        <span className="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> 
-              {/* END item */}
-              <div className="item">
-                <div className="row justify-content-center">
-                  <div className="col-lg-8 mx-auto">
-                    <div className="testimonial-block text-center">
-                      <blockquote className="mb-5">
-                        <p>“Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.”</p>
-                      </blockquote>
-                      <div className="author-info">
-                        <div className="author-pic">
-                          <img src="images/person-1.png" alt="Maria Jones" className="img-fluid" />
-                        </div>
-                        <h3 className="font-weight-bold">Maria Jones</h3>
-                        <span className="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> 
-              {/* END item */}
-              <div className="item">
-                <div className="row justify-content-center">
-                  <div className="col-lg-8 mx-auto">
-                    <div className="testimonial-block text-center">
-                      <blockquote className="mb-5">
-                        <p>“Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.”</p>
-                      </blockquote>
-                      <div className="author-info">
-                        <div className="author-pic">
-                          <img src="images/person-1.png" alt="Maria Jones" className="img-fluid" />
-                        </div>
-                        <h3 className="font-weight-bold">Maria Jones</h3>
-                        <span className="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> 
-              {/* END item */}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  {/* End Testimonial Slider */}
+  
 </div>
 
     </>

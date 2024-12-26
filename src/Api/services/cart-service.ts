@@ -39,6 +39,6 @@ export const deleteCart = async (cartItemId : string) => {
         return response;
     } catch (error) {
         console.error(error);
-        throw new Error('Delete cart failed');
+        //throw new Error('Delete cart failed');
     }
 }

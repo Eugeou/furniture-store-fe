@@ -169,7 +169,7 @@ const Shop = ()=>{
               <ProductCard key={product.Id} product={product} />
             ))}
             {/* Start Column 1 */}
-            <div className="col-12 col-md-4 col-lg-3 mb-5">
+            {/* <div className="col-12 col-md-4 col-lg-3 mb-5">
               <a className="product-item" href="#">
                 <img src="images/product-3.png" className="img-fluid product-thumbnail" />
                 <h3 className="product-title">Nordic Chair</h3>
@@ -178,7 +178,7 @@ const Shop = ()=>{
                   <img src="images/cross.svg" className="img-fluid" />
                 </span>
               </a>
-            </div> 
+            </div>  */}
             {/* End Column 1 */}
             {/* Start Column 2 */}
             {/* <div className="col-12 col-md-4 col-lg-3 mb-5">

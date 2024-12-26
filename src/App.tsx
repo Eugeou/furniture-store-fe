@@ -17,6 +17,7 @@ import Services from "./Services";
 import Shop from "./Shop";
 import ProductDetail from "./ProductDetail";
 import LoginPage from "./Auth/Login";
+import OrderPage from "./Order";
 import AddressPage from "./Address";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { ToastContainer } from "react-toastify";
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/productdetail" element={<ProductDetail/>}/>
             <Route path="/signin" element={<LoginPage/>}/>
             <Route path="/address" element={<AddressPage/>}/>
+            <Route path="/order" element={<OrderPage/>}/>
 
             
             {/* <Route path="*" element={<NotFound/>}/> */}

@@ -211,11 +211,11 @@ const AddressPage: React.FC = () => {
   return (
     <div className="container mt-5">
       <h2>Address Management</h2>
-      <h4>Hi, {user?.FullName}, this is your address list</h4>
-      <Button type="primary" className="mb-5 mt-5 p-2" style={{ backgroundColor: '#f0c14b', borderColor: '#a88734', color: 'black' }} onClick={() => showModal()}>
+      <h4 className="mt-3">Hi, {user?.FullName}, this is your address list</h4>
+      <Button type="primary" className="mb-2 mt-2 p-2" style={{ backgroundColor: '#f0c14b', borderColor: '#a88734', color: 'black' }} onClick={() => showModal()}>
         Add New Address
       </Button>
-      <Table dataSource={addresses} columns={columns} rowKey="Id" className='mt-5 mb-5' />
+      <Table dataSource={addresses} columns={columns} rowKey="Id" className='mt-3 mb-5' />
 
       <Modal 
         title={isEdit ? 'Edit Address' : 'Add New Address'} 
