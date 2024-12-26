@@ -16,21 +16,35 @@ import {motion} from 'framer-motion'
 //import useSessionAuth from '@/hooks/useSessionAuth';
 import { toast } from 'react-toastify';
 // import { SessionProvider } from 'next-auth/react';
+import { signup } from '../../Api/services/auth-service';
 
 
-const LoginPage = () => {
-  const { onLogin, isLoading } = useAuth()
-
-  const [form] = Form.useForm()
+const SignUpPage = () => {
+  
+  const [form] = Form.useForm();
+  const navigate = useNavigate();
   const handleSubmit = async (values: StoreLogin) => {
-    await onLogin(values)
-    console.log('values: ', values , 'isLoading: ', isLoading)
+    try {
+      await signup(values)
+      toast.success("You have signed up successfully");
+        navigate('/signin')
+    } catch (error) {
+      toast.error("Internal error during sign up " + error);
+    }
+};
+
+const CheckSamePassword = (rule: any, value: any) => {
+  const password = form.getFieldValue('password');
+  if (value && value !== password) {
+    return Promise.reject('Passwords do not match');
   }
-  const { user } = useAppSelector(selectAuth)
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (user) navigate('/')
-  }, [user])
+    return Promise.resolve();
+  };
+//   const { user } = useAppSelector(selectAuth)
+//   
+//   useEffect(() => {
+//     if (user) navigate('/')
+//   }, [user])
 
 //   const { onLogin, isLoading } = useSessionAuth();
 //   const [form] = Form.useForm();
@@ -48,18 +62,18 @@ const LoginPage = () => {
 
 return (
   <div className="login-page vw-100 vh-100 d-flex justify-content-center align-items-center bg-opacity-75 bg-center bg-no-repeat flex-column gap-3 p-5" style={{ backgroundColor: "#3b5d50", borderRadius: "20px" }}>
-    {isLoading && <AppLoading />}
+    {/* {isLoading && <AppLoading />} */}
     <div className="shadow p-4 bg-opacity-45 bg-white backdrop-blur" style={{ width: '50%', backdropFilter: 'blur(10px)', borderRadius: "20px"
      }}>
       <div className="row g-3">
         <div className="col-12 d-flex flex-column justify-content-center align-items-center">
-          <h1 className="h3 fw-bold text-center text-primary">Login</h1>
+          <h1 className="h3 fw-bold text-center text-primary mb-4">Sign Up an Account</h1>
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="row g-3">
               <div className="col-12">
                 <Form.Item
                   name="email"
-                  label={<h2 className="fw-semibold fs-5 text-primary">User name</h2>}
+                  label={<h2 className="fw-semibold fs-5 text-primary">Email</h2>}
                   rules={[{ required: true, message: 'Please enter your username' }]}
                 >
                   <motion.div
@@ -91,9 +105,25 @@ return (
                     />
                   </motion.div>
                 </Form.Item>
-                <a href="/forgot-password">
+                <Form.Item
+                  name="confirmPassword"
+                  label={<h2 className="fw-semibold fs-5 text-primary">Confirm Password</h2>}
+                  dependencies={['password']}
+                  rules={[
+                    { required: true, message: 'Please confirm your password' },
+                    { validator: CheckSamePassword }
+                  ]}
+                >
+                    <Input 
+                      className="form-control fs-5 py-2"
+                      type="password"
+                      placeholder="Please confirm your password"
+                    />  
+                </Form.Item>
+
+                {/* <a href="/forgot-password">
                   <Typography.Text className="fs-6 text-primary text-decoration-underline text-end">Forgot password</Typography.Text>
-                </a>
+                </a> */}
               </div>
 
               <div className="col-12 p-4 mt-5">
@@ -110,12 +140,12 @@ return (
                     //loading={isLoading}
                     style={{ backgroundColor: "#3b5d50", borderRadius: "15px" }}
                   >
-                    <Typography.Text className="fs-5 fw-semibold text-white">Login</Typography.Text>
+                    <Typography.Text className="fs-5 fw-semibold text-white">Register account</Typography.Text>
                   </button>
                   <p className="text-center mt-3 fw-semibold">Or</p>
-                  <a href="/signup" className="text-center w-100">
+                  <a href="/register" className="text-center w-100">
                     
-                      <Typography.Text className="fs-5 fw-semibold text-primary">Register</Typography.Text>
+                      <Typography.Text className="fs-5 fw-semibold text-primary">Back to login</Typography.Text>
                   </a>
                 </motion.div>
               </div>
@@ -133,4 +163,4 @@ return (
 
 }
 
-export default LoginPage
+export default SignUpPage

@@ -102,6 +102,26 @@ export const refreshTokenService = async (refreshToken: string, userId: string):
   return data
 }
 
+export const forgotPassword = async (email: string) => {
+  const { data } = await axios.post<{
+    data: any
+  }>(BASE_API + `/auth/sendOtp/${email}`, {
+    baseURL: BASE_API
+  })
+  return data
+}
+
+export const signup = async (bodySignup: StoreLogin) => {
+  const signupURL = BASE_API + "/auth/signup";
+    try {
+        const response = await axios.post(signupURL, bodySignup);
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Login failed');
+  }
+}
+
   
 
   
