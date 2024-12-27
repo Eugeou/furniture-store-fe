@@ -143,7 +143,7 @@ return (
                     <Typography.Text className="fs-5 fw-semibold text-white">Register account</Typography.Text>
                   </button>
                   <p className="text-center mt-3 fw-semibold">Or</p>
-                  <a href="/register" className="text-center w-100">
+                  <a href="/signin" className="text-center w-100">
                     
                       <Typography.Text className="fs-5 fw-semibold text-primary">Back to login</Typography.Text>
                   </a>
